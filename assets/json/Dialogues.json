@@ -1,0 +1,7 @@
+{
+    "hello" : ["Hi!", "Hello.", "What's up?", "Yo.", "Hiya.", "Hey, there!", "<nods>", "Sup?"],
+    "bye"   : ["Bye.", "See ya.", "Peace out.", "<nods>", "<waves dismissively>", "Adios.", "Goodbye."],
+    "activity" : ["No. There's nothing to do here.", "Ask someone else."],
+    "money" : ["Try diggin' a hole through the crust. I hear there's diamonds down there.", "You can gather weeds and sell them to Charlie."],
+    "charlie" : ["He trades in weeds down by the water."]    
+}
