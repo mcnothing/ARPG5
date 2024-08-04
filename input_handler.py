@@ -1,20 +1,22 @@
 import pygame as pg
 from pygame.locals import *
 
+pg.joystick.init()
+
 COMMANDS = [
-    'AIM',
-    'SHOOT',
-    'HEAL',
-    'SPECIAL',
-    'LEFT',
-    'RIGHT',
-    'UP',
-    'DOWN',
-    'INTERACT',
-    'MENU',
-    'ATTACK',
-    'DASH',
-    'SWAP_WEAPON'
+    'AIM',      #RT
+    'SHOOT',    #LT
+    'HEAL',     #LB
+    'SPECIAL',  #RB
+    'LEFT',     #Left Stick
+    'RIGHT',    #Left Stick
+    'UP',       #Left Stick
+    'DOWN',     #Left Stick
+    'INTERACT',     #Y
+    'MENU',         #B
+    'ATTACK',       #X
+    'DASH',         #A
+    'SWAP_WEAPON'   #Back
 ]
 
 KEYBOARD_PRESSED = {
@@ -92,17 +94,34 @@ HAT_AXES = {
 
 actions = {key: False for key in COMMANDS}
 running = True
+JOYSTICK = pg.Joystick(0)
+
 
 def handle_events():
     global running
-    for event in pg.event.get():
-        if event.type == QUIT:
+    for e in pg.event.get():
+        if e.type == QUIT:
             running = False
         ### Flips the flag for the key true. Event handlers in the Game State flip it back after handling.
-        if event.type == KEYDOWN:
-            if event.key in KEYBOARD_PRESSED.keys():
-                actions[KEYBOARD_PRESSED[event.key]] = True
+        if e.type == KEYDOWN:
+            if e.key in KEYBOARD_PRESSED.keys():
+                actions[KEYBOARD_PRESSED[e.key]] = True
         ### Flips the flag for certain keys false when released. Continuous values are handled by state.
-        if event.type == KEYUP:
-            if event.key in KEYBOARD_RELEASED.keys():
-                actions[KEYBOARD_RELEASED[event.key]] = False    
+        if e.type == KEYUP:
+            if e.key in KEYBOARD_RELEASED.keys():
+                actions[KEYBOARD_RELEASED[e.key]] = False
+        if e.type == JOYAXISMOTION:
+            if e.axis == 0:
+                actions['LEFT'] = e.value <= -0.1
+                actions['RIGHT'] = e.value >= 0.1
+            if e.axis == 1:
+                actions['UP'] = e.value <= -0.1
+                actions['DOWN'] = e.value >= 0.1
+        if e.type == JOYBUTTONDOWN:
+            actions[CONTROLLER_BUTTONS[e.button]] = True
+        if e.type == JOYBUTTONUP:
+            actions[CONTROLLER_BUTTONS[e.button]] = False
+
+class InputHandler():
+    def __init__(self):
+        pass

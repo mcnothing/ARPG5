@@ -25,10 +25,10 @@ class AI:
                 self.parent.actions[direction] = False
             match option:
                 case 0:
-                    self.parent.actions[choice(['up', 'down', 'left', 'right'])] = True
+                    self.parent.actions[choice(['UP', 'DOWN', 'LEFT', 'RIGHT'])] = True
                 case 1:
-                    self.parent.actions[choice(['up', 'down'])] = True
-                    self.parent.actions[choice(['left', 'right'])] = True
+                    self.parent.actions[choice(['UP', 'DOWN'])] = True
+                    self.parent.actions[choice(['LEFT', 'RIGHT'])] = True
                 case 2:
                     for direction in self.parent.actions.keys():
                         self.parent.actions[direction] = False
@@ -62,13 +62,13 @@ class AI:
         c = pygame.math.Vector2(self.parent.hitbox.center)
         t = pygame.math.Vector2(self.target)
         if c.x - t.x > 1:
-            actions['left'] = True
+            actions['LEFT'] = True
         if c.x - t.x < -1:
-            actions['right'] = True
+            actions['RIGHT'] = True
         if c.y - t.y > 1:
-            actions['up'] = True
+            actions['UP'] = True
         if c.y - t.y < -1:
-            actions['down'] = True
+            actions['DOWN'] = True
         
         
 
